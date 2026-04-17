@@ -1,0 +1,12 @@
+[project]
+name = "pathfinding-neuroevolution"
+version = "1.0.0"
+description = "Solving pathfinding problems using neuroevolution (genetic algorithm with neural networks)"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "pygame",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
