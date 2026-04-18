@@ -3,7 +3,8 @@ from neuroevolution.network import NeuralNetwork
 from neuroevolution.genome import Genome
 from neuroevolution.population import Population
 from neuroevolution.simulation import Simulation
-from neuroevolution.visualization import Visualizer
+from neuroevolution.snapshot import TrainingSnapshot
+from neuroevolution.visualization import TrainingVisualizer, Visualizer
 
 __all__ = [
     "Config",
@@ -11,5 +12,7 @@ __all__ = [
     "Genome",
     "Population",
     "Simulation",
+    "TrainingSnapshot",
+    "TrainingVisualizer",
     "Visualizer",
 ]

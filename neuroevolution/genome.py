@@ -13,7 +13,9 @@ class Genome:
         config: Config | None = None,
     ):
         self.config = config or Config()
-        self.network = network or NeuralNetwork(self.config.network_architecture)
+        self.network = network or NeuralNetwork(
+            self.config.network_architecture,
+        )
         self.genes = self.network.to_genes()
         self.fitness: int = 0
 
@@ -34,7 +36,8 @@ class Genome:
             self._mutate_v2(mutation_rate)
 
     def _mutate_v1(self, mutation_rate: float) -> None:
-        """Replace genes with a random value with probability ``mutation_rate``."""
+        """Replace genes with a random value with probability
+        `mutation_rate`."""
         for i in range(len(self.genes)):
             if random.random() <= mutation_rate:
                 self.genes[i] = random.random()

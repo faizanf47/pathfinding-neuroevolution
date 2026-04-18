@@ -1,4 +1,5 @@
 import random
+from collections.abc import Callable
 
 from neuroevolution.config import Config
 from neuroevolution.genome import Genome
@@ -50,8 +51,15 @@ class Simulation:
 
         return fitness
 
-    def run_training(self) -> tuple[Genome, list[float], list[float]]:
+    def run_training(
+        self,
+        on_generation: Callable[[int, Genome, float, int], None] | None = None,
+    ) -> tuple[Genome, list[float], list[float]]:
         """Train the population over all generations.
+
+        Args:
+            on_generation: Optional callback invoked after each generation with
+                (generation, best_genome_clone, avg_fitness, best_fitness).
 
         Returns:
             A tuple of (best_genome, average_fitness_history, best_fitness_history).
@@ -82,6 +90,15 @@ class Simulation:
                 f"Generation {generation}: "
                 f"best={best_fitness}, avg={population.average_fitness():.2f}"
             )
+
+            if on_generation is not None:
+                snapshot_genome = best_genome or gen_fittest
+                on_generation(
+                    generation,
+                    snapshot_genome.clone(),
+                    population.average_fitness(),
+                    best_fitness,
+                )
 
             population.evolve()
 
